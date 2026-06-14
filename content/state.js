@@ -1,29 +1,39 @@
 // Web Highlighter — Shared State
 // Module holding global variables used across content scripts
 
-let floatingButton = null;
-let savedRange = null;
-let savedText = '';
+window.WebHighlighter = window.WebHighlighter || {};
+(() => {
+	const WH = window.WebHighlighter;
+	let floatingButton = null;
+	let savedRange = null;
+	let savedText = '';
 
-export { floatingButton, savedRange, savedText };
+	WH.setFloatingButton = function setFloatingButton(btn) {
+		floatingButton = btn;
+	};
 
-/**
- * Update the shared state references.
- * Use these instead of direct assignment from outside.
- */
-export function setFloatingButton(btn) {
-	floatingButton = btn;
-}
+	WH.getFloatingButton = function getFloatingButton() {
+		return floatingButton;
+	};
 
-export function setSavedRange(range) {
-	savedRange = range;
-}
+	WH.setSavedRange = function setSavedRange(range) {
+		savedRange = range;
+	};
 
-export function setSavedText(text) {
-	savedText = text;
-}
+	WH.getSavedRange = function getSavedRange() {
+		return savedRange;
+	};
 
-export function clearSavedState() {
-	savedRange = null;
-	savedText = '';
-}
+	WH.setSavedText = function setSavedText(text) {
+		savedText = text;
+	};
+
+	WH.getSavedText = function getSavedText() {
+		return savedText;
+	};
+
+	WH.clearSavedState = function clearSavedState() {
+		savedRange = null;
+		savedText = '';
+	};
+})();
